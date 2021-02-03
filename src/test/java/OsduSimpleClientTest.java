@@ -14,22 +14,22 @@ public class OsduSimpleClientTest {
  
     @BeforeClass
     public void setUp() {
-      dataPartition = "opendes";
-      token = "abcde";
-      successUrl = "https://server.test.com";
-      successContentType = "application/json";
-      simpleClient = new OsduSimpleClient(successUrl, dataPartition, successContentType, token);
+        dataPartition = "opendes";
+        token = "abcde";
+        successUrl = "https://server.test.com";
+        successContentType = "application/json";
+        simpleClient = new OsduSimpleClient(successUrl, dataPartition, successContentType, token);
     }
     
-    @Test(groups = { "integration" }, enabled=false ) // Disabled for now; need to refactor to leverage env variables for valid tokens
+    @Test(groups = { "validation" }, enabled=false ) // Disabled for now; need to refactor to leverage env variables for valid tokens; currently errors out due to null response body
     public void expectedSearchSuccess() {
-      String query = "{ kind: \"*:*:*:*\", limit: 1 }";
-      try {
-        simpleClient.Search(query);
-        System.out.println("expectedSearchSuccess: Search query is valid.");
-      } catch (Exception e) {
-          org.testng.Assert.fail("unexpected exception", e);
-      }
+        String query = "{ kind: \"a:b:c:d\", limit: 1 }";
+        try {
+            simpleClient.Search(query);
+            System.out.println("expectedSearchSuccess: Search query is valid.");
+        } catch (Exception e) {
+            org.testng.Assert.fail("unexpected exception", e);
+        }
     }
     
     @Test(groups = { "validation" }, 

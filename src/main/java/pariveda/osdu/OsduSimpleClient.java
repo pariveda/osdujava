@@ -32,13 +32,13 @@ public class OsduSimpleClient extends OsduBaseClient{
 			return resp;
 		}
 		else {
-			throw new IOException("Provided Search Query is invalid");
+			throw new IllegalArgumentException("Provided Search Query does not contain valid kind pattern");
 		}
 	}
 
-	protected boolean isValidSearchQuery(String query) throws JSONException, IllegalArgumentException {
+	protected boolean isValidSearchQuery(String query) throws JSONException {
 		JSONObject queryJson = new JSONObject(query);
-		if( queryJson.getString("kind").matches("*:*:*:*") ) {
+		if( queryJson.getString("kind").matches(".+:.+:.+:.+") ) {
 			return true;
 		}
 		return false;

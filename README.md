@@ -9,7 +9,7 @@ front-end application.
 
 This client assumes you are obtaining a token yourself (e.g. via your application's
 login form or otheer mechanism. With this SimpleOsduClient, you simply provide that token.
-With this simplicity, you are also then responsible for reefreshing the token as needed and
+With this simplicity, you are also then responsible for refreshing the token as needed and
 re-instantiating the client with the new token.
 
 
