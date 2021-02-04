@@ -1,6 +1,6 @@
-# osdupy
+# osdujava
 
-A simple python client for the [OSDU](https://community.opengroup.org/osdu) data platform.
+A simple java client for the [OSDU](https://community.opengroup.org/osdu) data platform.
 
 ### SimpleOsduClient
 
@@ -9,15 +9,15 @@ front-end application.
 
 This client assumes you are obtaining a token yourself (e.g. via your application's
 login form or otheer mechanism. With this SimpleOsduClient, you simply provide that token.
-With this simplicity, you are also then respnsible for reefreeshing the token as needed and
+With this simplicity, you are also then responsible for refreshing the token as needed and
 re-instantiating the client with the new token.
 
 
 ## Currently supported methods
 
-- [search](osdu/search.py)
+- [search](osdu/OsduSimpleClient.java)
   - query
-- [delivery](osdu/delivery.py)
+- [delivery](osdu/OsduSimpleClient.java)
   - get_signed_urls
 
 ## Usage
@@ -26,7 +26,7 @@ re-instantiating the client with the new token.
 String url = "base_url";
     	String dataPartition = "dataparition";
     	String contentType =  "application/json";
-    	String token = "";
+    	String token = "token_string_value_to_access_osdu"; 
     	var client = new OsduSimpleClient(url, dataPartition, contentType, token);
 ```
 
