@@ -64,7 +64,7 @@ public class OsduSimpleClientTest {
     @Test(groups = {"validation"},
     expectedExceptions = JSONException.class)
     public void expectedCursorLoadSuccess() {
-        String query = "{ kind: \"*:*:*:*\"";
+        String query = "{ kind: \"*:*:*:*\" }";
         String cursor = "2";
         try {
             simpleClient.SearchWithPaging(query, cursor);
@@ -74,9 +74,9 @@ public class OsduSimpleClientTest {
     }
 
     @Test(groups = {"validation"},
-    expectedExceptions = JSONException.class)
+    expectedExceptions = IllegalArgumentException.class)
     public void expectedCursorLoadError() {
-        String query = "{ kind: \"*:*:*:*\"";
+        String query = "{ kind: \"*:*:*:*\" }";
         String cursor = "TWO";
         try {
             simpleClient.SearchWithPaging(query, cursor);
