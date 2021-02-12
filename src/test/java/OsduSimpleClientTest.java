@@ -15,6 +15,7 @@ public class OsduSimpleClientTest {
     @BeforeClass
     public void setUp() {
         dataPartition = "opendes";
+        // put in the token and base url to test
         token = "abcde";
         successUrl = "https://server.test.com";
         successContentType = "application/json";
@@ -36,8 +37,10 @@ public class OsduSimpleClientTest {
     expectedExceptions = JSONException.class) 
     public void expectedSearchJSONError() {
         String query = "test123";
+        String cursor = "2";
         try {
             simpleClient.Search(query);
+            simpleClient.SearchWithPaging(query, cursor);
         }
         catch (IOException e) {
             System.out.println("expectedSearchError: caught unexpected IOException:\n" + e.getMessage());
@@ -48,10 +51,36 @@ public class OsduSimpleClientTest {
     expectedExceptions = IllegalArgumentException.class) 
     public void expectedSearchPayloadError() {
         String query = "{ kind: \"*:*\" }";
+        String cursor = "2";
         try {
             simpleClient.Search(query);
+            simpleClient.SearchWithPaging(query, cursor);
         }
         catch (IOException e) {
+            System.out.println("expectedSearchError: caught unexpected IOException:\n" + e.getMessage());
+        }
+    }
+
+    @Test(groups = {"validation"},
+    expectedExceptions = JSONException.class)
+    public void expectedCursorLoadSuccess() {
+        String query = "{ kind: \"*:*:*:*\"";
+        String cursor = "2";
+        try {
+            simpleClient.SearchWithPaging(query, cursor);
+        } catch (IOException e) {
+            System.out.println("expectedSearchError: caught unexpected IOException:\n" + e.getMessage());
+        }
+    }
+
+    @Test(groups = {"validation"},
+    expectedExceptions = JSONException.class)
+    public void expectedCursorLoadError() {
+        String query = "{ kind: \"*:*:*:*\"";
+        String cursor = "TWO";
+        try {
+            simpleClient.SearchWithPaging(query, cursor);
+        } catch (IOException e) {
             System.out.println("expectedSearchError: caught unexpected IOException:\n" + e.getMessage());
         }
     }
