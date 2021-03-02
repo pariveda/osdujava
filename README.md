@@ -24,10 +24,10 @@ re-instantiating the client with the new token.
 
 ```java
 String url = "base_url";
-    	String dataPartition = "dataparition";
-    	String contentType =  "application/json";
-    	String token = "token_string_value_to_access_osdu"; 
-    	var client = new OsduSimpleClient(url, dataPartition, contentType, token);
+String dataPartition = "dataparition";
+String contentType =  "application/json";
+String token = "token_string_value_to_access_osdu"; 
+var client = new OsduSimpleClient(url, dataPartition, contentType, token);
 ```
 
 ### Using the client
@@ -38,15 +38,13 @@ Below are just a few usage examples.
 
 ```java
 JSONObject resp = client.Search(query); 
-System.out.println(resp.toString(4));	    
-	    
+System.out.println(resp.toString(4));
 ```
 #### Get signed URL
 
 ```java
 JSONObject signedURL = client.Delivery("srn list");
-System.out.println(signedURL.toString(4));		    
-	    
+System.out.println(signedURL.toString(4));
 ```
 
 
