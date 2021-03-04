@@ -3,28 +3,37 @@ import java.io.IOException;
 import org.json.*;
 import org.testng.annotations.*;
 import pariveda.osdu.*;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class OsduSearchServiceTest {
 
     private OsduSearchService searchService;
     private String dataPartition;
     private String awsRegion;
+    private String awsProfile;
     private String cognitoId;
     private String username;
     private String password;
-    private String successUrl;
+    private String osduUrl;
  
     @BeforeClass
     public void setUp() throws Exception {
-        dataPartition = "opendes";
-        // put in the token and base url to test
-        awsRegion = "ca-central-1";
-        cognitoId = "7or95445c0stsdq32q1788mffq";
-        username = "admin@testing.com";
-        password = "7JOOsIit";
-        successUrl = "https://mzn6swtkf0.execute-api.ca-central-1.amazonaws.com";
-        OsduAWSClient client = new OsduAWSClient(successUrl, dataPartition, awsRegion, cognitoId, username, password);
-        client.awsProfile = "par-osdu";
+        // Get Environment Variables
+        Dotenv dotenv = Dotenv.load();
+        dataPartition = dotenv.get("DATA_PARTITION");
+        awsRegion = dotenv.get("AWS_REGION");
+        cognitoId = dotenv.get("COGNITO_ID");
+        username = dotenv.get("OSDU_USERNAME");
+        password = dotenv.get("OSDU_PASSWORD");
+        osduUrl = dotenv.get("OSDU_URL");
+        awsProfile = dotenv.get("AWS_PROFILE");
+        System.out.println(awsProfile);
+
+        // Create client and service
+        OsduAWSClient client = new OsduAWSClient(osduUrl, dataPartition, awsRegion, cognitoId, username, password);
+        if (awsProfile != null) {
+            client.awsProfile = awsProfile;
+        }
         searchService = new OsduSearchService(client);
     }
     
