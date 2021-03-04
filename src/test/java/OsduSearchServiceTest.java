@@ -19,7 +19,7 @@ public class OsduSearchServiceTest {
     @BeforeClass
     public void setUp() throws Exception {
         // Get Environment Variables
-        Dotenv dotenv = Dotenv.load();
+        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
         dataPartition = dotenv.get("DATA_PARTITION");
         awsRegion = dotenv.get("AWS_REGION");
         cognitoId = dotenv.get("COGNITO_ID");
