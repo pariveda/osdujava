@@ -3,7 +3,7 @@ import java.io.IOException;
 import org.json.*;
 import org.testng.annotations.*;
 import pariveda.osdu.*;
-import io.github.cdimascio.dotenv.Dotenv;
+import io.github.cdimascio.dotenv.*;
 
 public class OsduSearchServiceTest {
 
@@ -20,6 +20,10 @@ public class OsduSearchServiceTest {
     public void setUp() throws Exception {
         // Get Environment Variables
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+        for (DotenvEntry e : dotenv.entries()) {
+            System.out.println(e.getKey());
+            System.out.println(e.getValue());
+        }
         dataPartition = dotenv.get("DATA_PARTITION");
         awsRegion = dotenv.get("AWS_REGION");
         cognitoId = dotenv.get("COGNITO_ID");
@@ -27,7 +31,6 @@ public class OsduSearchServiceTest {
         password = dotenv.get("OSDU_PASSWORD");
         osduUrl = dotenv.get("OSDU_URL");
         awsProfile = dotenv.get("AWS_PROFILE");
-        System.out.println(awsProfile);
 
         // Create client and service
         OsduAWSClient client = new OsduAWSClient(osduUrl, dataPartition, awsRegion, cognitoId, username, password);
