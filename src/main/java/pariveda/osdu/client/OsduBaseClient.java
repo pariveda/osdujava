@@ -64,7 +64,7 @@ public abstract class OsduBaseClient {
 		.method("POST", requestBody)
 		.addHeader("Content-Type", this.contentType)
 		.addHeader("data-partition-id", this.dataPartition)
-		.addHeader("Authorization", this.accessToken)
+		.addHeader("Authorization", "Bearer " + this.accessToken)
 		.build();
 		
 		// Send Request

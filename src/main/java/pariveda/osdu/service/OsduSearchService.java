@@ -14,27 +14,17 @@ public class OsduSearchService extends OsduBaseService {
         return this.client.Post("/api/search/v2/query", query.toJSON());
 	}
 
+	public JSONObject SearchWithPaging(OsduQueryModel query) throws IOException {
+		return this.SearchWithPaging(query, null);
+	}
 	public JSONObject SearchWithPaging(OsduQueryModel query, String cursor) throws IOException {
-        if (isValidCursor(cursor)) {
+		if (cursor == null) {
+			return this.client.Post("/api/search/v2/query_with_cursor", query.toJSON());
+		}
+		else {
             JSONObject searchBody = query.toJSON();
             searchBody.put("cursor", cursor);
             return this.client.Post("/api/search/v2/query_with_cursor", searchBody);
-        }
-        else {
-            throw new IllegalArgumentException("Provided Cursor is not numeric");
-        }
-	}
-
-    // Helpers
-	protected boolean isValidCursor(String cursor) throws JSONException {
-		if (cursor == null) {
-			return false;
 		}
-		try {
-			int int_cursor = Integer.parseInt(cursor);
-		} catch (NumberFormatException e) {
-			return false;
-		}
-		return true;
 	}
 }
