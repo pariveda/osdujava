@@ -22,3 +22,10 @@ jobs:
           architecture: x64
       - name: Test with Maven
         run: mvn test
+        env:
+          OSDU_URL: ${{ secrets.OSDU_URL }}
+          COGNITO_ID: ${{ secrets.COGNITO_ID }}
+          OSDU_USERNAME: ${{ secrets.OSDU_USERNAME }}
+          OSDU_PASSWORD: ${{ secrets.OSDU_PASSWORD }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          DATA_PARTITION: ${{ secrets.DATA_PARTITION }}
