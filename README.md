@@ -25,25 +25,38 @@ re-instantiating the client with the new token.
 ```java
 String url = "base_url";
 String dataPartition = "dataparition";
-String contentType =  "application/json";
 String token = "token_string_value_to_access_osdu"; 
-var client = new OsduSimpleClient(url, dataPartition, contentType, token);
+var client = new OsduSimpleClient(url, dataPartition, token);
+var service = new OsduService(client);
 ```
 
-### Using the client
+or 
+
+```java
+String url = "base_url";
+String dataPartition = "dataparition";
+String awsRegion = "token_string_value_to_access_osdu"; 
+String cognitoClientId = "cognito_client_id";
+String username = "username";
+String password = "password";
+var client = new OsduAWSClient(url, dataPartition, awsRegion, cognitoClientId, username, password);
+var service = new OsduService(client);
+```
+
+### Using the service
 
 Below are just a few usage examples.
 
 #### Search for records by query
 
 ```java
-JSONObject resp = client.Search(query); 
+JSONObject resp = service.Search.V2.Search(query); 
 System.out.println(resp.toString(4));
 ```
 #### Get signed URL
 
 ```java
-JSONObject signedURL = client.Delivery("srn list");
+JSONObject signedURL = service.Delivery.V2.GetSignedUrlsFromSrns(["srn", "srn"]);
 System.out.println(signedURL.toString(4));
 ```
 
