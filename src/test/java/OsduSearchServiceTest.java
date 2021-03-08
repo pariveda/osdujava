@@ -43,7 +43,7 @@ public class OsduSearchServiceTest {
         try {
             OsduQueryModel query = new OsduQueryModel("*:*:*:*");
             query.limit = 1;
-            searchService.Search(query);
+            searchService.V2.Search(query);
             System.out.println("expectedSearchSuccess: Search query is valid.");
         } catch (Exception e) {
             org.testng.Assert.fail("unexpected exception", e);
@@ -55,8 +55,8 @@ public class OsduSearchServiceTest {
         try {
             OsduQueryModel query = new OsduQueryModel("*:*:*:*");
             query.limit = 1;
-            JSONObject results = searchService.SearchWithPaging(query);
-            searchService.SearchWithPaging(query, results.getString("cursor"));
+            JSONObject results = searchService.V2.SearchWithPaging(query);
+            searchService.V2.SearchWithPaging(query, results.getString("cursor"));
             System.out.println("expectedSearchSuccess: Search query is valid.");
         } catch (IOException e) {
             System.out.println("expectedSearchError: caught unexpected IOException:\n" + e.getMessage());
@@ -68,8 +68,8 @@ public class OsduSearchServiceTest {
     public void expectedSearchPayloadError() {
         try {
             OsduQueryModel query = new OsduQueryModel("*:*");
-            searchService.Search(query);
-            searchService.SearchWithPaging(query, "2");
+            searchService.V2.Search(query);
+            searchService.V2.SearchWithPaging(query, "2");
         }
         catch (IOException e) {
             System.out.println("expectedSearchError: caught unexpected IOException:\n" + e.getMessage());

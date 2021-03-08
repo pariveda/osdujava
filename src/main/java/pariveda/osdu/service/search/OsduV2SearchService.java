@@ -4,8 +4,8 @@ import org.json.*;
 import java.io.IOException;
 import okhttp3.*;
 
-public class OsduSearchService extends OsduBaseService {
-	public OsduSearchService(OsduBaseClient osdu_client){
+public class OsduV2SearchService extends OsduBaseService {
+	public OsduV2SearchService(OsduBaseClient osdu_client){
 		super(osdu_client);
 	}
 

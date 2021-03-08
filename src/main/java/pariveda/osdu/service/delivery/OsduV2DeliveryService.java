@@ -4,12 +4,12 @@ import org.json.*;
 import java.util.*;
 import java.io.IOException;
 
-public class OsduDeliveryService extends OsduBaseService {
-	public OsduDeliveryService(OsduBaseClient osdu_client){
+public class OsduV2DeliveryService extends OsduBaseService {
+	public OsduV2DeliveryService(OsduBaseClient osdu_client){
 		super(osdu_client);
 	}
 
-	public JSONObject Delivery(List<String> srns) throws IOException {
+	public JSONObject GetSignedUrlsFromSrns(List<String> srns) throws IOException {
         JSONObject deliveryBody = new JSONObject();
         deliveryBody.put("srns", srns);
 

@@ -1,10 +1,10 @@
 package pariveda.osdu;
 
-public class OsduR2Service {
+public class OsduService {
 	public OsduDeliveryService Delivery;
 	public OsduSearchService Search;
 	
-	public OsduR2Service(OsduBaseClient osdu_client){
+	public OsduService(OsduBaseClient osdu_client){
 		this.Delivery = new OsduDeliveryService(osdu_client);
 		this.Search = new OsduSearchService(osdu_client);
 	}
